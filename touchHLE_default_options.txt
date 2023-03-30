@@ -47,3 +47,6 @@ com.atodab.actane: --landscape-left --button-to-touch=A,430,300 --button-to-touc
 
 # Wolfenstein 3D
 com.idsoftware.wolf3d: --landscape-right
+
+# Spore Origins
+com.ea.spore.naj.efigsj: --landscape-left --y-tilt-offset=35
