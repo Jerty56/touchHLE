@@ -335,7 +335,9 @@ impl Allocator {
     #[must_use]
     pub fn free(&mut self, base: VAddr) -> GuestUSize {
         let Some(freed) = self.used_chunks.remove_with_base(base) else {
-            panic!("Can't free {:#x}, unknown allocation!", base);
+            //panic!("Can't free {:#x}, unknown allocation!", base);
+            log!("Tolerating double-free of {:#x}", base);
+            return 0;
         };
 
         if let Some(adjacent) = self
