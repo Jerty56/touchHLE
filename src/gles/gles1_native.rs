@@ -454,21 +454,45 @@ impl GLES for GLES1Native {
         gles11::CopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height)
     }
     unsafe fn TexEnvf(&mut self, target: GLenum, pname: GLenum, param: GLfloat) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnvf(target, pname, param)
     }
     unsafe fn TexEnvx(&mut self, target: GLenum, pname: GLenum, param: GLfixed) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnvx(target, pname, param)
     }
     unsafe fn TexEnvi(&mut self, target: GLenum, pname: GLenum, param: GLint) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnvi(target, pname, param)
     }
     unsafe fn TexEnvfv(&mut self, target: GLenum, pname: GLenum, params: *const GLfloat) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnvfv(target, pname, params)
     }
     unsafe fn TexEnvxv(&mut self, target: GLenum, pname: GLenum, params: *const GLfixed) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnvxv(target, pname, params)
     }
     unsafe fn TexEnviv(&mut self, target: GLenum, pname: GLenum, params: *const GLint) {
+        // ANGLE doesn't support this extension
+        if pname == gles11::TEXTURE_FILTER_CONTROL_EXT {
+            return;
+        }
         gles11::TexEnviv(target, pname, params)
     }
 
