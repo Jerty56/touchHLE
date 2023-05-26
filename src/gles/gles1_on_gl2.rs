@@ -40,7 +40,10 @@ use std::ffi::CStr;
 pub const CAPABILITIES: &[GLenum] = &[
     gl21::ALPHA_TEST,
     gl21::BLEND,
-    gl21::COLOR_LOGIC_OP,
+    // ANGLE asserts if we try to check this capability.
+    // https://github.com/google/angle/blob/main/doc/ES1Status.md suggests that
+    // logic op support is incomplete, so that might be why.
+    //gl21::COLOR_LOGIC_OP,
     gl21::CLIP_PLANE0,
     gl21::LIGHT0,
     gl21::LIGHT1,
@@ -611,6 +614,9 @@ impl GLES for GLES1OnGL2 {
     unsafe fn DisableClientState(&mut self, array: GLenum) {
         assert!(ARRAYS.iter().any(|&ArrayInfo { name, .. }| name == array));
         gl21::DisableClientState(array);
+    }
+    unsafe fn IsEnabled(&mut self, cap: GLenum) -> GLboolean {
+        gles11::IsEnabled(cap)
     }
     unsafe fn GetBooleanv(&mut self, pname: GLenum, params: *mut GLboolean) {
         let (type_, _count) = GET_PARAMS.get_type_info(pname);

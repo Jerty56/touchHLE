@@ -448,7 +448,8 @@ unsafe fn present_renderbuffer(gles: &mut dyn GLES, window: &mut Window) {
     let old_arrays = {
         let mut old_arrays = [gles11::FALSE; gles1_on_gl2::ARRAYS.len()];
         for (is_enabled, info) in old_arrays.iter_mut().zip(gles1_on_gl2::ARRAYS.iter()) {
-            gles.GetBooleanv(info.name, is_enabled);
+            // ANGLE bug: IsEnabled attributes not available via GetBooleanv
+            *is_enabled = gles.IsEnabled(info.name);//gles.GetBooleanv(info.name, is_enabled);
             gles.DisableClientState(info.name);
         }
         old_arrays
@@ -459,7 +460,8 @@ unsafe fn present_renderbuffer(gles: &mut dyn GLES, window: &mut Window) {
             .iter_mut()
             .zip(gles1_on_gl2::CAPABILITIES.iter())
         {
-            gles.GetBooleanv(name, is_enabled);
+            // ANGLE bug: IsEnabled attributes not available via GetBooleanv
+            *is_enabled = gles.IsEnabled(name);//gles.GetBooleanv(name, is_enabled);
             gles.Disable(name);
         }
         old_capabilities

@@ -46,6 +46,7 @@ pub trait GLES {
     unsafe fn ClientActiveTexture(&mut self, texture: GLenum);
     unsafe fn EnableClientState(&mut self, array: GLenum);
     unsafe fn DisableClientState(&mut self, array: GLenum);
+    unsafe fn IsEnabled(&mut self, cap: GLenum) -> GLboolean;
     unsafe fn GetBooleanv(&mut self, pname: GLenum, params: *mut GLboolean);
     unsafe fn GetFloatv(&mut self, pname: GLenum, params: *mut GLfloat);
     unsafe fn GetIntegerv(&mut self, pname: GLenum, params: *mut GLint);

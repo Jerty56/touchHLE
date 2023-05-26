@@ -72,7 +72,7 @@ fn glGetError(env: &mut Environment) -> GLenum {
         if err != 0 {
             log!("Warning: glGetError() returned {:#x}", err);
         }
-        err
+        0 //err
     })
 }
 fn glEnable(env: &mut Environment, cap: GLenum) {

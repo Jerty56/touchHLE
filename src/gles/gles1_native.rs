@@ -71,6 +71,9 @@ impl GLES for GLES1Native {
     unsafe fn DisableClientState(&mut self, array: GLenum) {
         gles11::DisableClientState(array)
     }
+    unsafe fn IsEnabled(&mut self, cap: GLenum) -> GLboolean {
+        gles11::IsEnabled(cap)
+    }
     unsafe fn GetBooleanv(&mut self, pname: GLenum, params: *mut GLboolean) {
         gles11::GetBooleanv(pname, params)
     }

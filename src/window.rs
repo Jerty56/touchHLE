@@ -167,6 +167,11 @@ impl Window {
         // remove this (https://github.com/hikari-no-yume/touchHLE/issues/85).
         sdl2::hint::set("SDL_JOYSTICK_HIDAPI", "0");
 
+        // Weird stuff needed for ANGLE on macOS
+        // https://discourse.libsdl.org/t/cannot-get-macos-libangle-sdl2-to-work/28722/4
+        sdl2::hint::set("SDL_OPENGL_ES_DRIVER", "1");
+        unsafe { sdl2_sys::SDL_GL_SetAttribute(sdl2_sys::SDL_GLattr::SDL_GL_CONTEXT_EGL, 1) };
+
         if env::consts::OS == "android" {
             // It's important to set context version BEFORE window creation
             // ref. https://wiki.libsdl.org/SDL2/SDL_GLattr
